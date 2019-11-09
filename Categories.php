@@ -4,51 +4,43 @@ require_once "mysql_credentials.php";
 
 class Categories{
 
-
-    private $connection;
-    public function __construct()
-    {
-        $this->connection = new mysqli(HOST,USER,PASSWORD,DATABASE) or die ("MYSQL CONNECTION FAILED:" . mysqli_connect_error());
-    }
-
-    public function __destruct()
-    {
-        $this->connection->close();
-    }
-
+    ///TODO - change ids to exemplars of Category;
     public function getCategories(){
-        return getCategoriesByParentId("NULL");
+        return $this->getCategoriesByParent(null);
     }
-
-    public function getCategoriesByParentId($parentId){
+    public function getCategoriesByParent($parent){
         $categories = array(
-            head => $parentId,
-            childrens => $this->getChildrensId($parentId)
+            "head" => $parent,
+            "childrens" => $this->getChildrens($parent)
         );
         foreach ($categories["childrens"] as $children){
             array_push($categories, $this->getCategoriesByParentId($children));
         }
         return $categories;
     }
-    private function addChildCategories($categoryHeadId){
-
-    }
-
-    public function getChildrensId($categoryId){
-        mysqli_real_escape_string($categoryId);
-        $result = $this->connection->query("SELECT id FROM categories WHERE parent_id = $categoryId");
+    public function getChildrens($category){
+        $query = "SELECT * FROM categories WHERE parent_id = $category->id ;";
+        $result = MySql::query($query);
         return $result->fetch_array();
     }
     public function deleteCategory($categoryId){
-        mysqli_real_escape_string($categoryId);
-        foreach ($this->getChildrensId() as $childId) {
+        foreach ($this->getChildrensId($categoryId) as $childId) {
             $this->deleteCategory($childId);
         }
-        $this->connection->query("DELETE FROM categories WHERE id = $categoryId");
+        $query = "DELETE FROM categories WHERE id = $categoryId";
+        MySql::query($query);
     }
-
     public function addCategory($name, $description, $parentId){
-        ///
+        $query = "INSERT INTO categories (name, description, parentId)".
+                " VALUES ( $name , $description , $parentId ) ;";
+        MySql::query($query);
     }
-
+    public function changeCategoryName($id, $newName){
+        $query = "UPDATE categories SET name = $newName WHERE id = $id;";
+        MySQL::query($query);
+    }
+    public function changeCategoryDescription($id, $newDescription){
+        $query = "UPDATE categories SET description = $newDescription WHERE id = $id;";
+        MySQL::query($query);
+    }
 }
