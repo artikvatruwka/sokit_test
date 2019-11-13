@@ -3,4 +3,4 @@
 const HOST = "localhost";
 const USER = "root";
 const PASSWORD = "";
-const DATABASE = "sok_it";
+const DATABASE = "sokit";
