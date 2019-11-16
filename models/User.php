@@ -2,18 +2,16 @@
 
 class User
 {
-    private $login;
-    private $password;
+
 
     /**
      * User constructor.
      * @param $login
      * @param $password
      */
-    public function __construct($login, $password)
+    public function __construct()
     {
-        $this->login = $login;
-        $this->password = $password;
+
     }
 
 }

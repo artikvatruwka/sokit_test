@@ -9,21 +9,23 @@
     <title>Registration</title>
 </head>
 <body>
-<div class="row">
-    <div class="col d-flex justify-content-center">
-        <form id="login-form" method="post">
+    <div class="row d-flex justify-content-center">
+
+        <form class="col" id="login-form" method="post" style="max-width: 400px">
+            <h1>Registration</h1>
             <label for="login">Login</label>
             <input class="form-control" id="login" name = "login" type="text">
             <label for="password" on>Password</label>
             <input class="form-control" id="password" name="password" type="password">
-            <input  class="form-check-label" id="show-password" type="checkbox" onclick="showPassword()"> show password
+            <hr>
+            <div class="d-flex justify-content-between">
+                <input class="btn btn-primary " type="button" value="Register">
+                <a class="text-success" href="Login.php">Login</a>
+            </div>
+
         </form>
     </div>
-    <div class="col d-flex">
-        <a></a>
-    </div>
-</div>
 
-<script type="text/javascript" src="js/login.js"></script>
+<script type="module" src="js/registration.js"></script>
 </body>
 </html>
