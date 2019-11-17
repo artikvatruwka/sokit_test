@@ -13,8 +13,8 @@
 
 <?php
 session_start();
-require_once "controllers/CategoriesController.php";
-require_once "models/Category.php";
+require_once "../controllers/CategoriesController.php";
+require_once "../models/Category.php";
 $categories = new CategoriesController();
 $level = 0;
 $category = $categories->getCategories();

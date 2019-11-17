@@ -1,7 +1,7 @@
 <?php
 
-require_once "mysql_credentials.php";
-require_once "MySQL.php";
+require_once "../mysql_credentials.php";
+require_once "../MySQL.php";
 class CategoriesController{
 
     ///TODO - change ids to exemplars of Category;
