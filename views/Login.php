@@ -9,22 +9,30 @@
     <title>Login</title>
 </head>
 <body>
-<div class="row d-flex justify-content-center">
-    <form class="col" id="login-form" method="post" style="max-width: 400px">
-        <h1>Log in</h1>
-        <label for="login">Login</label>
-        <input class="form-control" id="login" name = "login" type="text">
-        <label for="password" on>Password</label>
-        <input class="form-control" id="password" name="password" type="password">
-        <hr>
-        <div class="d-flex justify-content-between">
-            <input class="btn btn-success " type="button" value="Log in">
-            <a href="Registration.php">Registration</a>
-        </div>
-    </form>
+    <div class="row d-flex justify-content-center">
+        <form class="col" id="login-form" method="post" style="max-width: 400px">
+            <h1>Log in</h1>
+            <div class="form-group">
+                <label for="login">Login</label>
+                <input class="form-control" id="login" name = "login" type="text" placeholder="Login">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control" id="password" name="password" type="password" placeholder="Password">
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between">
+                <input id="login-btn" class="btn btn-success " type="button" value="Log in">
+                <a href="Registration.php">Registration</a>
+            </div>
+        </form>
 
-</div>
+    </div>
+    <br>
+    <div id="errors" class="row d-flex justify-content-center">
 
-<script type="module" src="js/login.js"></script>
+    </div>
+<script type="text/javascript" src="js/ajax.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
 </body>
 </html>

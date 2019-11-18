@@ -1,14 +1,10 @@
-const btn = document.getElementById("register");
-let login = document.getElementById("login");
-let password = document.getElementById("password");
-let errorBox = document.getElementById("errors");
+const btn = document.getElementById("register-btn");
+const login = document.getElementById("login");
+const password = document.getElementById("password");
+const errorBox = document.getElementById("errors");
+
 btn.addEventListener("click",()=>{
     let body = "login="+login.value+"&password="+password.value;
-    // body = {
-    //    login: login.value,
-    //    password: password.value
-    // };
-    // body = JSON.stringify(body);
     httpPostAsync('../views/handler/registration.php',body,(response)=>{
         response = JSON.parse(response);
         errorBox.innerHTML="";
@@ -21,7 +17,7 @@ btn.addEventListener("click",()=>{
             errorBox.appendChild(div);
         }
         if(response.status === "success"){
-            window.location.href("./Main.php")
+            window.location.href = "./Main.php";
         }
 
     });

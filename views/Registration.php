@@ -10,8 +10,7 @@
 </head>
 <body>
     <div class="row d-flex justify-content-center">
-
-            <form class="col" id="login-form" method="post" style="max-width: 400px">
+        <form class="col" id="login-form" method="post" style="max-width: 400px">
             <h1>Registration</h1>
             <div class="form-group">
                 <label for="login">Login</label>
@@ -25,7 +24,7 @@
             </div>
             <hr>
             <div class="d-flex justify-content-between">
-                <input id="register" class="btn btn-primary" type="button" value="Register">
+                <input id="register-btn" class="btn btn-primary" type="button" value="Register">
                 <a class="text-success" href="Login.php">Login</a>
             </div>
         </form>

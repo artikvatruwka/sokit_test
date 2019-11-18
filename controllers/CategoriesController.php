@@ -3,10 +3,8 @@
 require_once "../mysql_credentials.php";
 require_once "../MySQL.php";
 class CategoriesController{
-
-    ///TODO - change ids to exemplars of Category;
     public function getCategories(){
-        return $this->getCategoriesByParent(new Category("NULL","","",""));
+        return $this->getCategoriesByParent(new Category(null,"","",null));
     }
     public function getCategoriesByParent(?Category $parent){
         $categories = array(
@@ -20,8 +18,8 @@ class CategoriesController{
     }
     public function getChildrens(Category $category){
 
-        if ($category->id === "NULL"){
-            $query = "SELECT id, name, description, parent_id FROM categories WHERE parent_id IS $category->id ;";
+        if ($category->id === null){
+            $query = "SELECT id, name, description, parent_id FROM categories WHERE parent_id IS null ;";
         }else{
             $query = "SELECT id, name, description, parent_id FROM categories WHERE parent_id = $category->id ;";
         }
@@ -37,6 +35,7 @@ class CategoriesController{
         foreach ($this->getChildrens($category) as $child) {
             $this->deleteCategory($child);
         }
+
         $query = "DELETE FROM categories WHERE id = $category->id ";
         MySql::query($query);
         return;
@@ -54,5 +53,4 @@ class CategoriesController{
         MySQL::query($query);
         return;
     }
-
 }
