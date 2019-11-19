@@ -8,7 +8,7 @@ class Category
     public $description;
     public $parent;
 
-    public function __construct(?int $id,?string $name,?string $description,?int $parent)
+    public function __construct(?int $id,?string $name,?string $description,?string $parent)
     {
         $this->id = $id;
         $this->name = $name;

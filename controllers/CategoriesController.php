@@ -1,8 +1,8 @@
 <?php
-
-require_once "../mysql_credentials.php";
-require_once "../MySQL.php";
+require_once dirname(__DIR__)."/MySQL.php";
+require_once dirname(__DIR__)."/models/Category.php";
 class CategoriesController{
+
     public function getCategories(){
         return $this->getCategoriesByParent(new Category(null,"","",null));
     }
@@ -41,15 +41,22 @@ class CategoriesController{
         return;
     }
     public function addCategory(Category $category){
+        $parent = '';
+        if($category->parent == 'null' || $category->parent ==''){
+            $parent = 'null';
+        }else{
+            $parent = "'".$category->parent."'";
+        }
+
         $query = "INSERT INTO categories (name, description, parent_id)".
-                " VALUES ( $category->name , $category->description , $category->parent ) ;";
+                " VALUES ( '$category->name' , '$category->description' , $parent ) ;";
         MySql::query($query);
         $query = "SELECT MAX(id) as id FROM categories";
-        $lastId = MySQL::query($query)->fetch_array();
-        return new Category($lastId["id"],$$category->name,$$category->description,$category->parent);
+       // $lastId = MySQL::query($query)->fetch_array();
+       // return new Category($lastId["id"],$$category->name,$$category->description,$category->parent);
     }
     public function modifyCategory(Category $new){
-        $query = "UPDATE categories SET name = $new->name , description = $new->description WHERE id = $new->id;";
+        $query = "UPDATE categories SET name = '$new->name' , description = '$new->description' WHERE id = $new->id;";
         MySQL::query($query);
         return;
     }

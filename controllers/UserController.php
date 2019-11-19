@@ -1,4 +1,5 @@
 <?php
+require_once dirname(__DIR__)."/models/User.php";
 class UserController
 {
     private function encode($value,$salt){

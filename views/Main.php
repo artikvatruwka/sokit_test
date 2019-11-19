@@ -12,14 +12,13 @@
 <body>
 <div class="row">
     <div class="col">
+        <h1>Categories: </h1>
         <form>
             <input class='btn' type='button' data-id='null' name='add' value='➕ add' >
-            <input class='btn' type='button' data-id='null' name='modify' value='📝 edit' >
-            <input class='btn' type='button' data-id='null' name='delete' value='🗑️ delete'>
+            <hr>
             <?php
             session_start();
-            require_once "../controllers/CategoriesController.php";
-            require_once "../models/Category.php";
+            require_once dirname(__DIR__)."\\controllers\\CategoriesController.php";
             $categories = new CategoriesController();
             $level = 0;
             $category = $categories->getCategories();
@@ -33,9 +32,8 @@
                 if($level>0){
                     echo "<br>";
                     echo "<input class='btn' type='button' data-id='".$category["head"]->id."' name='add' value='➕ add' > ";
-                    echo "<input class='btn' type='button' data-id='".$category["head"]->id."' name='modify' value='📝 edit' > ";
+                    echo "<input class='btn' type='button' data-id='".$category["head"]->id."' name='edit' value='📝 edit' > ";
                     echo "<input class='btn'type='button' data-id='".$category["head"]->id."' name='delete' value='🗑️ delete'> ";
-
                     for($i=1; $i<$level; $i++){
                         if($level)
                             echo " > ";
@@ -50,9 +48,13 @@
             }
             ?>
         </form>
+        <div id="errors" class="row d-flex justify-content-center">
+
+        </div>
     </div>
 </div>
 
 <script src="js/ajax.js"></script>
+<script src="js/category.js"></script>
 </body>
 </html>
