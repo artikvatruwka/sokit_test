@@ -14,7 +14,7 @@
     <div class="col">
         <h1>Categories: </h1>
         <form>
-            <input class='btn' type='button' data-id='null' name='add' value='➕ add' >
+            <input class='btn' type='button' data-id='null' name='add' value='➕ add category' >
             <hr>
             <?php
             session_start();
@@ -31,14 +31,17 @@
 
                 if($level>0){
                     echo "<br>";
-                    echo "<input class='btn' type='button' data-id='".$category["head"]->id."' name='add' value='➕ add' > ";
+                    echo "<input class='btn' type='button' data-id='".$category["head"]->id."' name='add' value='➕ add subcategory' > ";
                     echo "<input class='btn' type='button' data-id='".$category["head"]->id."' name='edit' value='📝 edit' > ";
                     echo "<input class='btn'type='button' data-id='".$category["head"]->id."' name='delete' value='🗑️ delete'> ";
                     for($i=1; $i<$level; $i++){
                         if($level)
                             echo " > ";
                     }
-                    echo "<span title='".$category["head"]->description."'>". $category["head"]->name."</span>";
+                    echo "<span>". $category["head"]->name." </span>";
+                    if($category["head"]->description!=""){
+                        echo "<small>(".$category["head"]->description.")</small>";
+                    }
                 }
 
                 $level++;

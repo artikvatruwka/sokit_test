@@ -1,12 +1,13 @@
 <?php
+require_once dirname(__DIR__,2)."\\models\\User.php";
+require_once dirname(__DIR__,2)."\\controllers\\UserController.php";
+require_once dirname(__DIR__,2)."\\MySQL.php";
 try{
 
     if (isset($_POST['login']) && isset($_POST['password']) ) {
         $login = $_POST['login'];
         $password = $_POST['password'];
-        require_once dirname(__DIR__,2)."\\models\\Category.php";
-        require_once dirname(__DIR__,2)."\\controllers\\CategoriesControlleer.php";
-        require_once dirname(__DIR__,2)."\\MySQL.php";
+
         $user = new User($login,$password);
         $userController = new UserController();
         $userController->registration($user);
