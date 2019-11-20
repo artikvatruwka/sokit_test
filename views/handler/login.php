@@ -9,13 +9,14 @@ try{
         $password = $_POST['password'];
         $user = new User($login,$password);
         $userController = new UserController();
-        $userController->login($user);
-        //session_destroy();
-        session_start();
+        $sessionUser  = $userController->login($user);
 
+        session_start();
+        $_SESSION["id"] = $sessionUser->id;
+        $_SESSION["login"] = $sessionUser->login;
+        $_SESSION["authenticated"] = true;
         $response = new stdClass();
         $response->status = "success";
-        $response->session = session_id();
         echo json_encode($response);
 
     }else{

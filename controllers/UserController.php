@@ -13,6 +13,9 @@ class UserController
         if(strlen($user->login)==0){
             throw new Exception("You must enter login!");
         }
+        if(strlen($user->login)>0){
+            throw new Exception("Login is longer than 32 characters!");
+        }
         if(!$this->isValid($user->login)){
             throw new Exception("Non valid characters for login! use only a-z and 0-9 characters!");
         }
@@ -33,6 +36,15 @@ class UserController
 
         $sql = "INSERT INTO users (login, password) VALUES ('$user->login' ,'$user->password')";
         MySQL::query($sql);
+        $sql = "SELECT * FROM users WHERE login = '$user->login' AND password = '$user->password'";
+        $result = MySQL::query($sql);
+        if ($result->num_rows>0){
+            $row = $result->fetch_array();
+
+            return  new User($row['login'],null,$row['id']);
+        }else{
+            throw new Exception('Something went wrong, user was not added, try to login!');
+        }
         return true;
     }
 
@@ -49,18 +61,19 @@ class UserController
         if($this->userExist($user)){
             $user->password = $this->encode($user->password,$user->getSalt());
             $sql = "SELECT * FROM users WHERE login = '$user->login' AND password = '$user->password'";
-            if (MySQL::query($sql)->num_rows>0){
-                return true;
+            $result = MySQL::query($sql);
+            if ($result->num_rows>0){
+                $row = $result->fetch_array();
+
+                return  new User($row['login'],null,$row['id']);
             }else{
-                throw new Exception('Login or password is wrong!'.$sql);
+                throw new Exception('Login or password is wrong!');
             }
         }else{
             throw new Exception('User does not exist!');
         }
     }
-    public function logout(User $user){
 
-    }
     public function userExist(User $user){
         $sql = "SELECT * FROM users WHERE login = '$user->login'";
         return  (bool) MySQL::query($sql)->num_rows != 0;

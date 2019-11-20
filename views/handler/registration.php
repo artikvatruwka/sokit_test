@@ -11,12 +11,16 @@ try{
         $user = new User($login,$password);
         $userController = new UserController();
         $userController->registration($user);
+        session_start();
+        $_SESSION["id"] = $sessionUser->id;
+        $_SESSION["login"] = $sessionUser->login;
+        $_SESSION["authenticated"] = true;
         $response =new stdClass();
         $response->status = "success";
         echo json_encode($response);
 
     }else{
-        throw new Exception("no login and password");
+        throw new Exception("No login and password");
     }
 }catch(Exception $exception)
 {

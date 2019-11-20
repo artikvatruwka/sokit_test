@@ -1,4 +1,7 @@
+<?php
 
+    session_start();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,10 +9,15 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <title>Panel</title>
 </head>
 <body>
+<nav class="navbar navbar-dark bg-dark text-white">
+
+    <?php echo "<span>Hello ".$_SESSION["login"] . "!</span>" ?>
+    <a href="handler/logout.php">logout</a>
+</nav>
 <div class="row">
     <div class="col">
         <h1>Categories: </h1>
@@ -17,7 +25,6 @@
             <input class='btn' type='button' data-id='null' name='add' value='➕ add category' >
             <hr>
             <?php
-            session_start();
             require_once dirname(__DIR__)."\\controllers\\CategoriesController.php";
             $categories = new CategoriesController();
             $level = 0;
@@ -56,7 +63,7 @@
         </div>
     </div>
 </div>
-
+<script src="js/bootstrap.min.js"></script>
 <script src="js/ajax.js"></script>
 <script src="js/category.js"></script>
 </body>
