@@ -10,7 +10,7 @@ try{
 
         $user = new User($login,$password);
         $userController = new UserController();
-        $userController->registration($user);
+        $sessionUser = $userController->registration($user);
         session_start();
         $_SESSION["id"] = $sessionUser->id;
         $_SESSION["login"] = $sessionUser->login;

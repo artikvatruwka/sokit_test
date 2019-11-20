@@ -13,7 +13,7 @@ class UserController
         if(strlen($user->login)==0){
             throw new Exception("You must enter login!");
         }
-        if(strlen($user->login)>0){
+        if(strlen($user->login)>32){
             throw new Exception("Login is longer than 32 characters!");
         }
         if(!$this->isValid($user->login)){
